@@ -39,36 +39,36 @@ std::wostream& operator<<( std::wostream& wos, const Position & p )
  */
 bool solve_maze( Maze& m, const Position& start, const Position& end, std::list<direction_t> &solution )
 {
-    std::wcout << L"Entrei na solve_maze\n";
+    //std::wcout << L"Entrei na solve_maze\n";
     if (start == end) {
         m.mark_cell(start); // Mark the entry as part of the path.
-        std::wcout << start << L'\n';
+        //std::wcout << start << L'\n';
         return true; // We are already at the exit.
     }
 
     if (m.is_marked(start)) return false; // We have already visited this cell.
     
     m.mark_cell(start); // Mark the current cell as part of the path.
-    m.print();
+    //m.print();
 
-    std::wcout << start << L'\n';
+    //std::wcout << start << L'\n';
 
     for (const auto &dir : {UP, DOWN, LEFT, RIGHT}) {
         Position next = m.walk_to(start, dir);
 
         if (m.is_outside(next) or m.is_blocked(start, dir)) continue; // Skip if outside or blocked.
 
-        m.mark_cell(next); // Mark the current cell as part of the path.
-        m.print();
+        //m.mark_cell(next); // Mark the current cell as part of the path.
+        //m.print();
         
-        std::wcout << L"NEXT: " << next << L'\n';
+        //std::wcout << L"NEXT: " << next << L'\n';
 
         if (solve_maze(m, next, end, solution)) {
             solution.push_back(dir); // Add the direction to the solution.
             return true; // Found a path to the exit.
         }
 
-        m.unmark_cell(next); // Unmark if no path was found.
+        //m.unmark_cell(next); // Unmark if no path was found.
     }
 
     m.unmark_cell(start);
@@ -133,7 +133,7 @@ int main( int argc, char *argv[] ){
     std::locale::global(std::locale("pt_BR.UTF-8"));
     std::wcout.imbue(std::locale());
 
-    std::wcout << L"Teste de bloco: █ e ponto: •\n";
+    //std::wcout << L"Teste de bloco: █ e ponto: •\n";
 
     if ( argc != 2 ) {
         std::wcout << L">>> Missing input file!\n"
