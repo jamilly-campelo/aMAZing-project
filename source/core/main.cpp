@@ -11,14 +11,12 @@
 
 using std::vector;
 
-
 /// Print out a Position
 std::ostream& operator<<( std::ostream& os, const Position & p )
 {
     os << "(" << p.row << "," << p.col << ")";
     return os;
 }
-
 
 /*!
  * Acha um caminho da entrada até a saída, marcando as células que compõem
@@ -46,6 +44,11 @@ int read_file( std::string file_name, vector<vector<int>> &matrix ){
     // TODO:
     // The input file strem.
     std::ifstream ifs { file_name }; // Creating and Opening the stream.
+
+    if (not ifs.is_open()) {
+        std::cerr << "Erro: não foi possível abrir o arquivo \"" << file_name << "\".\n";
+        return ERR_FAILED_OPENING_INPUT_FILE;
+    }
 
     return READ_OK;
 }
