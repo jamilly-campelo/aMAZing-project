@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <cstdint>
 #include <iostream>
+#include <unordered_map>
 #include <vector>
 
 using std::vector;
@@ -53,6 +54,16 @@ public:
     EXIT,     //!< A cell marking the maze's exit point.
     PATH //!< A cell that has been marked as part of the path that leads from
          //!< the maze's entry point to the maze's exit point.
+  };
+  
+  /// A map that associates each cell type with a character symbol.
+  const std::unordered_map<cell_type, wchar_t> cell_2_symbol = {
+      {FREE, L' '},       //!< Free cell.
+      {WALL, L'█'},       //!< Wall cell.
+      {INV_WALL, L'.'},   //!< Invisible wall cell.
+      {ENTRY, L'x'},      //!< Entry cell.
+      {EXIT, L'e'},       //!< Exit cell.
+      {PATH, L'•'}        //!< Path cell.
   };
 
   /// Basic constructor. Receives a matrix corresponding to the maze.
